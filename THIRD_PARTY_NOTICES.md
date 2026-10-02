@@ -1,8 +1,9 @@
 # Third-Party Notices
 
 The MIT license in `LICENSE` covers the original Sujan Top-Up project code
-only. The following third-party components remain under their own licenses and
-are **not** owned by this project.
+only. Bundled third-party libraries and assets remain under their own licenses
+and are **not** owned by this project. The components below are redistributed
+under the terms listed.
 
 | Component | Use | License | Home |
 |-----------|-----|---------|------|

@@ -1,0 +1,308 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    
+    margin: 0;  /* Remove any default margin that may cause unwanted spacing */
+padding-top: 60px;  /* Add space to top of the page to prevent overlap with fixed navbar */
+
+  }
+  /* Navbar styles */
+.navbar {
+position: fixed;
+top: 0;
+left: 0;
+right: 0;
+width: 100%;
+background-color:rgb(36, 26, 167); /* White background */
+color:rgb(231, 230, 241); /* Dark blue text color */
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 10px 20px;
+z-index: 1000;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+animation: slideInFromTop 1s ease-out, blinkText 1.5s infinite;
+}
+
+/* Navbar animation for flying in */
+@keyframes slideInFromTop {
+0% {
+  transform: translateY(-50px);
+  opacity: 0;
+}
+100% {
+  transform: translateY(0);
+  opacity: 1;
+}
+}
+
+/* Blinking Text Animation */
+@keyframes blinkText {
+0%, 100% {
+  color:rgb(236, 235, 240);
+}
+50% {
+  color: rgba(200, 198, 209, 0.5); /* Slightly faded for blinking effect */
+}
+}
+
+.navbar .brand {
+display: flex;
+align-items: center;
+}
+
+.navbar .brand img {
+height: 40px;
+margin-left: 15px;
+margin-right: 20px;
+}
+
+.navbar .brand span {
+font-size: 30px;
+font-weight: 400;
+animation: blinkText 1.5s infinite; /* Apply blinking to text */
+}
+
+.navbar .menu {
+display: flex;
+gap: 35px;
+margin-right: 380px;
+}
+
+.navbar .menu a {
+text-decoration: none;
+color:rgb(236, 235, 243);
+font-size: 16px;
+padding: 8px 12px;
+border-radius: 4px;
+transition: background-color 0.7s ease, transform 0.3s ease;
+position: relative;
+}
+
+.navbar .menu a:hover {
+color: white;
+background-color: #10058c;
+transform: scale(1.1);
+}
+
+/* Footer Animation */
+.footer {
+bottom: 100px;
+left: 0;
+width: 100%;
+background-color: #10058c;
+color: white;
+text-align: center;
+padding: 5px 0;
+animation: slideInFromBottom 1s ease-out;
+}
+
+@keyframes slideInFromBottom {
+0% {
+  transform: translateY(50px);
+  opacity: 0;
+}
+100% {
+  transform: translateY(0);
+  opacity: 1;
+}
+} 
+
+/* Container Styling */
+.container {
+    max-width: 1400px; /* Increased container width for more spacious layout */
+    margin: 0 auto;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.9); /* Slightly more opaque white */
+    border-radius: 15px; /* Rounded corners for a smoother look */
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1); /* Stronger shadow for depth */
+}
+
+/* Header Styling */
+h1 {
+    text-align: center;
+    color: #1e90ff; /* Lighter blue for a more vibrant tone */
+    font-size: 3em; /* Larger font size for better visibility */
+    margin-bottom: 20px;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1); /* Subtle text shadow */
+}
+
+/* Button Styling */
+button {
+    background-color: #1e90ff; /* Matching blue button */
+    border: none;
+    color: white;
+    padding: 14px 28px; /* Slightly larger padding */
+    text-align: center;
+    font-size: 18px; /* Larger font for readability */
+    cursor: pointer;
+    border-radius: 8px; /* Rounded corners */
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button:hover {
+    background-color: #8a2be2; /* Gradient transition to violet on hover */
+    transform: scale(1.08); /* Larger scaling effect on hover */
+}
+
+/* Contact Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Dark overlay */
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 30px; /* Increased padding for a spacious look */
+    border-radius: 15px;
+    width: 60%;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content h3 {
+    color: #1e90ff; /* Blue header color */
+    font-size: 1.7em;
+    margin-bottom: 15px;
+}
+
+.modal-content a {
+    color: #8a2be2; /* Purple link color */
+    text-decoration: none;
+    font-size: 1.2em;
+}
+
+.modal-content a:hover {
+    text-decoration: underline;
+}
+
+.close {
+    color: #aaa;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    cursor: pointer;
+}
+
+/* Filter Form Styles */
+form {
+    text-align: center;
+    margin-bottom: 30px;
+    background-color: rgba(255, 255, 255, 0.95); /* Slightly more opaque form background */
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+form select, form button {
+    padding: 10px 15px;
+    margin: 8px;
+    font-size: 1.1em;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    background-color: #f5f5f5; /* Soft light gray for form controls */
+}
+
+form button {
+    background-color: #1e90ff;
+    color: white;
+}
+
+form select, form button:hover {
+    background-color: #e3daeb; /* Hover effect with purple */
+}
+
+/* Orders Cards Layout */
+.order-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    justify-content: space-between;
+}
+
+.card {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 10px;
+    width: 280px;
+    box-sizing: border-box;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.card h2 {
+    font-size: 1.6em;
+    color: #1e90ff;
+    margin-bottom: 12px;
+}
+
+.card ul {
+    list-style: none;
+    padding: 0;
+}
+
+.card ul li {
+    margin: 7px 0;
+    color: #333;
+}
+
+.card button {
+    margin-top: 12px;
+    background-color: #1e90ff;
+    color: white;
+    font-size: 1.1em;
+    padding: 12px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.card button:hover {
+    background-color: #8a2be2;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        max-width: 100%; /* Full-width on small screens */
+        padding: 20px;
+    }
+
+    .order-cards {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card {
+        width: 90%;
+        margin-bottom: 20px;
+    }
+
+    .modal-content {
+        width: 85%;
+    }
+}

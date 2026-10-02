@@ -1,0 +1,309 @@
+
+/* Global Styles */
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+font-family: 'Roboto', sans-serif;
+background: linear-gradient(120deg, #ff9a9e, #fad0c4, #fbc2eb);
+color: #333;
+display: flex;
+justify-content: center;
+align-items: center;
+min-height: 100vh;
+padding: 20px;
+font-size: 16px;
+animation: backgroundAnimation 8s infinite alternate ease-in-out;
+}
+
+/* Form Container */
+#form-content {
+background: linear-gradient(145deg, #ffffff, #f0f0f0);
+padding: 40px;
+border-radius: 15px;
+box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
+width: 100%;
+max-width: 1300px;
+transition: transform 0.3s ease, box-shadow 0.3s ease;
+animation: fadeIn 1s ease-in-out;
+}
+
+#form-content:hover {
+transform: scale(1.02);
+box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Form Title */
+h3 {
+
+text-align: center;
+color: #2c3e50;
+margin-bottom: 30px;
+font-size: 28px;
+padding-left: 30%;
+font-weight: 600;
+text-transform: uppercase;
+letter-spacing: 1px;
+animation: textGlow 1.5s infinite alternate;
+}
+
+/* Form Styling */
+form {
+display: flex;
+flex-direction: column;
+gap: 20px;
+}
+
+/* Label Styling */
+label {
+font-size: 16px;
+color: #2c3e50;
+font-weight: 500;
+margin-bottom: 5px;
+letter-spacing: 0.5px;
+animation: fadeIn 0.8s ease-in-out;
+}
+
+/* Input and Select Fields */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select {
+padding: 15px;
+border: 2px solid #7a377c;
+border-radius: 10px;
+font-size: 16px;
+background-color: #f9f9f9;
+transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+select:focus {
+border-color: #7ed4ff;
+box-shadow: 0 0 10px #ff758c;
+transform: scale(1.02);
+outline: none;
+}
+
+/* Card Container Styling */
+.card-container {
+display: flex;
+justify-content: space-between;
+flex-wrap: wrap;
+gap: 20px;
+padding: 20px;
+animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Card Styles */
+.card {
+flex: 1 1 calc(25% - 16px);
+background: linear-gradient(145deg, #ffe6ee, #fff1f5);
+padding: 20px;
+text-align: center;
+border-radius: 12px;
+box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.card:hover {
+transform: translateY(-10px) scale(1.05);
+box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Button Styling */
+button[type="button"] {
+background: linear-gradient(120deg, #7593ff, #bc7eff);
+color: white;
+padding: 15px;
+font-size: 18px;
+border: none;
+border-radius: 8px;
+cursor: pointer;
+transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+animation: fadeIn 0.8s ease-in-out;
+}
+
+button[type="button"]:hover {
+background: linear-gradient(120deg, #5afffc, #ff75e1);
+transform: translateY(-2px) scale(1.05);
+box-shadow: 0 5px 15px rgba(255, 117, 179, 0.4);
+}
+
+button[type="button"]:disabled {
+background: #bdc3c7;
+cursor: not-allowed;
+transform: scale(1);
+}
+
+/* Toggle Button Styling */
+#toggleButton {
+background: linear-gradient(120deg, #4CAF50, #81c784);
+color: white;
+padding: 10px 20px;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+font-size: 16px;
+transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#toggleButton:hover {
+background: linear-gradient(120deg, #45a049, #66bb6a);
+transform: scale(1.05);
+}
+
+#toggleButton:active {
+background: linear-gradient(120deg, #3e8e41, #4caf50);
+transform: scale(0.98);
+}
+
+/* Animations */
+@keyframes fadeIn {
+0% {
+opacity: 0;
+transform: translateY(20px);
+}
+100% {
+opacity: 1;
+transform: translateY(0);
+}
+}
+
+@keyframes textGlow {
+0% {
+text-shadow: 0 0 5px #ff758c, 0 0 10px #ff7eb3, 0 0 15px #ff91b4;
+}
+100% {
+text-shadow: 0 0 10px #ff5a75, 0 0 20px #ff758c, 0 0 25px #ff91b4;
+}
+}
+
+@keyframes backgroundAnimation {
+0% {
+background: linear-gradient(120deg, #ff9a9e, #fad0c4, #fbc2eb);
+}
+100% {
+background: linear-gradient(120deg, #fbc2eb, #fad0c4, #ff9a9e);
+}
+}
+/* Responsive Design */
+@media (max-width: 768px) {
+button[type="button"] {
+font-size: 14px;
+}
+}
+
+@media (max-width: 480px) {
+button[type="button"] {
+font-size: 12px;
+padding: 8px;
+}
+}
+
+@media (max-width: 448px) {
+
+
+/* Ensure cards are displayed as flex even on small screens */
+.card-container {
+display: flex;
+flex-wrap: wrap; /* Ensure wrapping of cards */
+justify-content: space-between;
+}
+}
+
+.k {
+display: inline-flex; /* Inline layout for flexibility */
+align-items: center; /* Vertically align items */
+gap: 10px; /* Space between text and logo */
+font-size: 1.5rem; /* Adjust text size */
+font-weight: bold; /* Bold text */
+text-align: left; /* Text aligns properly */
+}
+
+/* Style for the TikTok logo */
+.k-logo {
+height: 40px; /* Adjust height as needed */
+width: auto; /* Maintain aspect ratio */
+object-fit: contain; /* Ensure the image fits nicely */
+border-radius: 50%;padding-top: 2px;
+}
+
+
+
+.card.hidden {
+display: none; /* Ensure hidden cards are not visible initially */
+}
+@media (max-width: 768px) {
+/* Adjust card layout for smaller screens */
+.card {
+flex: 1 1 calc(75% - 16px); /* Makes cards take 75% width */
+padding: 15px; /* Reduces padding inside the card */
+}
+
+/* Reduces font size inside the card */
+.card h3 {
+font-size: 18px; /* Smaller text size */
+}
+
+.card p {
+font-size: 14px; /* Smaller text for paragraph or content */
+}
+}
+
+@media (max-width: 480px) {
+/* Adjust card layout for very small screens */
+.card {
+flex: 1 1 calc(50% - 10px); /* Cards take 85% width */
+padding: 10px; /* Further reduces padding */
+}
+
+/* Further reduce font size */
+.card h3 {
+font-size: 16px; /* Even smaller text size */
+}
+
+.card p {
+font-size: 12px; /* Smaller text for paragraph */
+}
+}
+
+
+
+
+
+.original-price {
+  text-decoration: line-through;
+  color: red;
+  margin-right: 10px;
+}
+
+.discounted-price {
+  font-weight: bold;
+  color: green;
+}
+
+
+.offer-message {
+  background-color: #f1f8e9;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 20px;
+  text-align: center;
+  color: #388e3c;
+}
+
+.offer-message strong {
+  color: #2e7d32;
+}
+
+
+.card.hidden {
+  display: none;
+}

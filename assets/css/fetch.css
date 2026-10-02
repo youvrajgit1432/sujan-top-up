@@ -1,0 +1,459 @@
+    /* General styles */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+      }
+  
+      /* Navbar styles */
+      .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: #10058c;
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+        z-index: 1000;
+      }
+  
+      .navbar .brand {
+        display: flex;
+        align-items: center;
+      }
+  
+      .navbar .brand img {
+        height: 40px;
+        margin-left: 15px;
+        margin-right: 20px;
+   
+      }
+  
+      
+      .navbar .brand span {
+      font-size: 25px;
+        font-weight: 400;
+      }
+  
+  
+      .navbar .menu {
+        display: flex;
+        gap: 35px;
+        margin-right: 380px;
+    
+      }
+      .navbar .menu a {
+      text-decoration: none;
+      color: #fff; /* Text color */
+      font-size: 16px; /* Font size */
+      padding: 8px 12px; /* Add some padding for better spacing */
+      border-radius: 4px; /* Add rounded corners */
+      transition: background-color 0.7s ease, transform 0.3s ease; /* Smooth transition */
+      position: relative; /* For positioning the progress line */
+  }
+  
+  .navbar .menu a::after {
+      content: ''; /* Creates an empty pseudo-element */
+      position: absolute;
+      bottom: 0;
+      left: 12px;
+      width: 0; /* Initially, no progress line */
+      height: 2px; /* Height of the progress line */
+      background-color:rgb(26, 171, 40); /* Progress line color */
+      border-radius: 2px;
+      transition: width 0.7s ease; /* Smooth animation */
+  }
+  
+  .navbar .menu a:hover {
+   /* Blue background on hover */
+      color: hsla(195, 25.00%, 93.70%, 0.95); /* Ensure text stays white */
+      transform: scale(1.1); /* Slight zoom effect */
+  }
+  
+  .navbar .menu a:hover::after {
+      width: 70%; /* On hover, progress line fills the entire width */
+  }
+  
+  
+      .navbar .menu-toggle {
+        display: none;
+        flex-direction: column;
+        gap: 4px;
+        cursor: pointer;
+      }
+  
+      .navbar .menu-toggle div {
+        width: 25px;
+        height: 3px;
+        background: #fff;
+      }
+  
+  
+  /* Responsive styles for small screens */
+  @media (max-width: 768px) {
+    .navbar .menu {
+      display: none; /* Hide the menu by default */
+      flex-direction: column;
+      background: #fff; /* White background for dropdown menu */
+      position: absolute;
+      top: 80px;
+      left: 39px;
+      width: 80%;
+      padding: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      z-index: 1000;
+    }
+    
+    .navbar .brand span {
+        font-size: 20px;
+          font-weight: 400;
+        }
+    
+  
+    /* Styling for menu items in dropdown (black text for items) */
+    .navbar .menu a {
+      color: #333; /* Black text for dropdown items */
+      background: white;
+      text-decoration: none;
+      padding: 2px 6px;
+      font-weight: bold;
+   margin-left: 35px;
+      border-radius: 4px;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+  
+    .navbar .menu a:hover {
+      background-color: #0056b3;
+      color: white;
+      transform: scale(1.05);
+    }
+  
+    /* Active menu when toggled */
+    .navbar .menu.active {
+      display: flex; /* Display the menu when active */
+    }
+  
+    /* Hamburger menu icon */
+    .navbar .menu-toggle {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+      width: 30px;
+      height: 25px;
+      cursor: pointer;
+      z-index: 1100; /* Ensure it's on top */
+    }
+  
+    .navbar .menu-toggle div {
+      width: 100%;
+      height: 4px;
+      background-color: #fff;
+      transition: transform 0.3s ease;
+    }
+  
+    /* Hamburger icon animation */
+    .navbar .menu-toggle.active div:nth-child(1) {
+      transform: translateY(9px) rotate(45deg);
+    }
+  
+    .navbar .menu-toggle.active div:nth-child(2) {
+      opacity: 0;
+    }
+  
+    .navbar .menu-toggle.active div:nth-child(3) {
+      transform: translateY(-9px) rotate(-45deg);
+    }
+  
+    /* Additional Styling */
+    .navbar .menu a.active {
+      background-color: #007bff;
+    }
+  }
+      /* Footer styles */
+      .footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: #10058c;
+        color: white;
+        text-align: center;
+        padding: 10px 0;
+      }
+  
+  /* Content Styles */
+  .content {
+      margin-top: 60px; /* To avoid overlap with fixed navbar */
+      padding-bottom: 60px; /* To avoid footer overlap */
+  }
+  
+  .hero {
+      text-align: center;
+      background: #f2f2f2;
+      padding: 10px 4px;
+  }
+  
+  .hero h1 {
+      font-size: 26px;
+      margin-bottom: 0px;
+  }
+  
+  .hero button {
+      background: #10058c;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      font-size: 18px;
+      border-radius: 5px;
+      transition: background 0.3s;
+  }
+  
+  .hero button:hover {
+      background: #555;
+  }
+  
+  .scrollable-content {
+      padding: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+  }
+  
+  .section {
+      background: #f4f4f4;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  .filter-button {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 7px 15px;
+      margin: 3px;
+      text-decoration: none;
+      border-radius: 5px;
+      cursor: pointer;
+  }
+  
+  .filter-button:hover {
+      background-color: #0056b3;
+  }
+  
+  /* Styles for small screens */
+  @media screen and (max-width: 768px) {
+      .section {
+          padding: 10px;
+          box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+      }
+  
+      .filter-button {
+          padding: 6px 12px;
+          margin: 2px;
+          font-size: 14px;
+      }
+  }
+  
+  @media screen and (max-width: 480px) {
+      .section {
+          padding: 8px;
+          border-radius: 5px;
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
+  
+      .filter-button {
+          padding: 5px 10px;
+          margin: 2px;
+          font-size: 12px;
+      }
+  }
+  /* Dropdown container styling */
+  .nav-item.dropdown.no-arrow {
+      display: inline-block;
+      margin-left: 20px;
+      position: relative;
+  }
+  
+  /* Dropdown toggle link styling */
+  .nav-link.dropdown-toggle {
+      display: flex;
+      align-items: center;
+      color:rgb(17, 56, 164);
+      text-decoration: none;
+  }
+  
+  /* Profile image inside the dropdown toggle */
+  .nav-link .img-profile {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      margin-right: 10px;
+  }
+  
+  /* Dropdown menu styling */
+  .dropdown-menu {
+      min-width: 200px;
+      padding: 10px 0;
+      border-radius: 6px;
+      box-shadow: rgba(0, 0, 0, 0.2) 0px 10px 20px;
+      background-color: #fff;
+      position: absolute;
+      right: 0;
+      top: 100%;
+      z-index: 1050;
+      display: none; /* Default state is hidden */
+  }
+  
+  /* Show dropdown menu on hover */
+  .nav-item.dropdown.no-arrow:hover .dropdown-menu {
+      display: block;
+  }
+  
+  /* User information inside dropdown */
+  .dropdown-menu span.text-gray-600 {
+      font-size: 14px;
+      display: block;
+      padding-left: 15px;
+      color: rgb(6, 6, 7);
+  }
+  
+  /* Logout button styling */
+  .dropdown-menu .dropdown-item {
+      font-size: 14px;
+      padding: 8px 16px;
+      font-weight: bold;
+      color: rgb(10, 10, 10);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+  }
+  
+  /* Logout button hover effect */
+  .dropdown-menu .dropdown-item:hover {
+      background-color: #f8f9fc;
+      color: #4e73df;
+  }
+  
+
+/* Form Styles with Animation */
+form {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 600px;
+    margin: 60px auto;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    animation: fadeInUp 1s ease-out, blinkText 2s infinite;
+  }
+  
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Input Fields Animation */
+  form input,
+  form select,
+  form textarea {
+    width: 100%;
+    padding: 12px;
+    margin-top: 8px;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    background: #f7f7f7;
+    color: #333;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+  }
+  
+  form input:focus,
+  form select:focus,
+  form textarea:focus {
+    border-color: #42a5f5;
+    background-color: #ffffff;
+    outline: none;
+  }
+  
+  .submit-feedback-btn {
+    background: #4caf50;
+    color: white;
+    padding: 12px 18px;
+    border: none;
+    margin-top: 20px;
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: 18px;
+    transition: all 0.3s ease-in-out;
+    display: inline-block;
+    animation: buttonHover 1.5s ease-in-out infinite;
+  }
+  
+  .submit-feedback-btn:hover {
+    background: #388e3c;
+    transform: scale(1.05);
+  }
+  
+  /* Hover effect for buttons */
+  @keyframes buttonHover {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+  }
+  
+  /* Form Label Styling */
+  form label {
+    display: block;
+    margin-top: 12px;
+    font-weight: bold;
+    color: #2e2e2e;
+    font-size: 1.1rem;
+  }
+  
+  /* Input and Textarea Color Grid */
+  form input,
+  form select,
+  form textarea {
+    background: #fafafa;
+    border-color: #dcdcdc;
+  }
+  
+  form label {
+    color: #424242;
+  }
+  
+  /* Footer Animation */
+   
+  @keyframes slideInFromBottom {
+    0% {
+      transform: translateY(50px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  

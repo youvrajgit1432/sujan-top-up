@@ -1,0 +1,175 @@
+/* Basic styles for the profile page */
+.divter {
+    padding: 20px;
+    background-color: #f4f7fc;
+    border-radius: 8px;
+    margin: 80px;
+   
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.divter h2 {
+    text-align: left;
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.divter h3 {
+    text-align: left;
+    font-size: 24px;
+    color: #007bff;
+}
+
+.divter p {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.file-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 30px;
+}
+
+.file-buttons .btn {
+    font-size: 10px;
+    padding: 10px 20px;
+    width: 180px;
+}
+
+/* Edit Profile Button */
+.file-buttons .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.file-buttons .btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+/* Change Password Button */
+.file-buttons .btn-warning {
+    background-color: #ffc107;
+    border-color: #ffc107;
+}
+
+.profile-buttons .btn-warning:hover {
+    background-color: #e0a800;
+    border-color: #e0a800;
+}
+
+/* Modal Styles */
+.modal-dialog {
+    max-width: 500px;
+}
+
+.modal-content {
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.modal-header {
+    background-color: #007bff;
+    color: white;
+    border-radius: 8px 8px 0 0;
+    padding: 15px;
+}
+
+.modal-title {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.close {
+    color: white;
+    font-size: 24px;
+}
+
+.modal-body {
+    padding: 20px;
+}
+
+.form-group label {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.form-control {
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+}
+
+.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.25);
+}
+
+/* Modal Footer */
+.modal-footer {
+    padding: 15px;
+    text-align: center;
+}
+
+.modal-footer .btn {
+    font-size: 16px;
+    padding: 10px 20px;
+    width: 180px;
+}
+
+/* Button colors for modals */
+.modal-footer .btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+.modal-footer .btn-secondary:hover {
+    background-color: #5a6268;
+    border-color: #5a6268;
+}
+
+.modal-footer .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.modal-footer .btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+.modal-footer .btn-warning {
+    background-color: #ffc107;
+    border-color: #ffc107;
+}
+
+.modal-footer .btn-warning:hover {
+    background-color: #e0a800;
+    border-color: #e0a800;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .divter {
+        margin: 10px;
+        padding: 15px;
+    }
+
+    .profile-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .profile-buttons .btn {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+}

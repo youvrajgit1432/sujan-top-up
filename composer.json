@@ -1,0 +1,15 @@
+{
+    "name": "youvrajgit1432/sujan-top-up",
+    "description": "Legacy PHP/MySQL gaming top-up project, sanitized and preserved as an open-source portfolio demo.",
+    "type": "project",
+    "license": "MIT",
+    "keywords": ["php", "mysql", "gaming", "topup", "legacy", "portfolio"],
+    "require": {
+        "php": ">=8.0",
+        "phpmailer/phpmailer": "^6.9"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true
+    }
+}

@@ -19,9 +19,11 @@ if (!defined('APP_NAME')) {
 
     // Public demo contact details. These are placeholders only - override
     // them in .env for your own deployment. Never commit real details.
+    // The phone is deliberately masked (non-dialable) and the WhatsApp number
+    // is intentionally empty so the demo never opens a chat to a fake number.
     define('SUPPORT_EMAIL', (string) env('SUPPORT_EMAIL', 'demo@example.test'));
-    define('SUPPORT_PHONE', (string) env('SUPPORT_PHONE', '9779800000000'));
-    define('WHATSAPP_NUMBER', (string) env('WHATSAPP_NUMBER', '9779800000000'));
+    define('SUPPORT_PHONE', (string) env('SUPPORT_PHONE', '+977-98XXXXXXXX'));
+    define('WHATSAPP_NUMBER', (string) env('WHATSAPP_NUMBER', ''));
 
     // Manual / offline payment instructions shown on the demo checkout.
     define('PAYMENT_INSTRUCTIONS', (string) env(
@@ -61,10 +63,60 @@ if (!function_exists('game_image_src')) {
     }
 }
 
+if (!function_exists('whatsapp_configured')) {
+    /**
+     * Whether a real WhatsApp number is configured.
+     *
+     * The demo default is empty, so outbound WhatsApp links are disabled
+     * instead of pointing at a placeholder / fake number.
+     */
+    function whatsapp_configured(): bool
+    {
+        $digits = preg_replace('/\D+/', '', (string) WHATSAPP_NUMBER);
+        return $digits !== null && $digits !== '' && preg_match('/^\d{10,15}$/', $digits) === 1;
+    }
+}
+
+if (!function_exists('whatsapp_client_number')) {
+    /** Digits-only WhatsApp number for client-side links ('' when disabled). */
+    function whatsapp_client_number(): string
+    {
+        return whatsapp_configured() ? (string) preg_replace('/\D+/', '', WHATSAPP_NUMBER) : '';
+    }
+}
+
+if (!function_exists('phone_link')) {
+    /**
+     * Build a tel: link. Returns a neutral '#' when only a masked placeholder
+     * is configured, so no outbound call is possible from the demo.
+     */
+    function phone_link(): string
+    {
+        $raw = (string) SUPPORT_PHONE;
+        if ($raw === '' || stripos($raw, 'X') !== false) {
+            return '#';
+        }
+        $digits = preg_replace('/\D+/', '', $raw);
+        if ($digits === null || $digits === '') {
+            return '#';
+        }
+        if (!str_starts_with($digits, '977')) {
+            $digits = '977' . $digits;
+        }
+        return 'tel:+' . $digits;
+    }
+}
+
 if (!function_exists('whatsapp_link')) {
-    /** Build a wa.me link using the configured WhatsApp number. */
+    /**
+     * Build a wa.me link using the configured WhatsApp number, or a neutral
+     * '#' when no real number is configured (demo mode).
+     */
     function whatsapp_link(string $text = ''): string
     {
+        if (!whatsapp_configured()) {
+            return '#';
+        }
         $url = 'https://wa.me/' . preg_replace('/\D+/', '', WHATSAPP_NUMBER);
         if ($text !== '') {
             $url .= '?text=' . rawurlencode($text);

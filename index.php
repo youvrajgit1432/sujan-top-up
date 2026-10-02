@@ -2541,7 +2541,7 @@ $result = $conn->query($query);
           <i class="bi bi-telephone flex-shrink-0"></i>
           <div>
             <h3>Call Us</h3>
-            <a href="tel:+977<?php echo e(SUPPORT_PHONE); ?>"><p><?php echo e(SUPPORT_PHONE); ?></p></a>
+            <a href="<?php echo e(phone_link()); ?>"><p><?php echo e(SUPPORT_PHONE); ?></p></a>
           </div>
         </div>
 

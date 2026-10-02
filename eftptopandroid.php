@@ -143,9 +143,9 @@ function submitForm() {
                 const whatsappMessage = encodeURIComponent(
                     `Game: ${formData.game}\nCoin Amount: ${formData.coinAmount}\nKonami Email: ${formData.konamiEmail}\nPassword: ${formData.password}\nPayment Details: ${formData.paymentDetails}\nPayment Option: ${formData.paymentOption}`
                 );
-                const whatsappNumber = "<?php echo WHATSAPP_NUMBER; ?>";
-                const whatsappLink = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
-                window.open(whatsappLink, "_blank");
+                const whatsappNumber = "<?php echo e(whatsapp_client_number()); ?>";
+                const whatsappLink = whatsappNumber ? `https://wa.me/${whatsappNumber}?text=${whatsappMessage}` : "";
+                if (whatsappLink) window.open(whatsappLink, "_blank");
 
                 // Submit form to save data
                 websiteForm.action = "games/efootandro/whats.php";
@@ -154,7 +154,7 @@ function submitForm() {
 
                 // Open WhatsApp after submission
                 setTimeout(() => {
-                    window.open(whatsappLink, "_blank");
+                    if (whatsappLink) window.open(whatsappLink, "_blank");
                 }, 1000);
             } else if (communicationOpt === "website") {
                 // Check if the user is logged in

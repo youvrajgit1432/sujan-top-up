@@ -141,9 +141,9 @@ echo "<script>var isLoggedIn = " . json_encode($isLoggedIn) . ";</script>";
                 const whatsappMessage = encodeURIComponent(
                     `Game: ${formData.game}\nGem Amount: ${formData.gemAmount} Gems\nSupercell Email: ${formData.supercellEmail}\nPayment Details: ${formData.paymentDetails}\nPayment Option: ${formData.paymentOption}`
                 );
-                const whatsappNumber = "<?php echo WHATSAPP_NUMBER; ?>"; // Your WhatsApp number
-                const whatsappLink = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
-                window.open(whatsappLink, "_blank");
+                const whatsappNumber = "<?php echo e(whatsapp_client_number()); ?>"; // Your WhatsApp number
+                const whatsappLink = whatsappNumber ? `https://wa.me/${whatsappNumber}?text=${whatsappMessage}` : "";
+                if (whatsappLink) window.open(whatsappLink, "_blank");
 
                 // Submit form to save data
                 websiteForm.action = "games/clash/whats.php";
@@ -152,7 +152,7 @@ echo "<script>var isLoggedIn = " . json_encode($isLoggedIn) . ";</script>";
 
                 // Open WhatsApp after submission
                 setTimeout(() => {
-                    window.open(whatsappLink, "_blank");
+                    if (whatsappLink) window.open(whatsappLink, "_blank");
                 }, 1000);
             } else if (communicationOpt === "website") {
                 // Check if the user is logged in

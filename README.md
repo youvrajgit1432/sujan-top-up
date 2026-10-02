@@ -188,7 +188,7 @@ All configuration lives in `.env` (gitignored). Copy `.env.example` to start.
 |----------|---------|
 | `APP_NAME`, `APP_URL`, `APP_ENV`, `APP_DEBUG` | Application identity/logging |
 | `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, `DB_PASSWORD` | Database |
-| `SUPPORT_EMAIL`, `SUPPORT_PHONE`, `WHATSAPP_NUMBER` | Public contact (placeholders) |
+| `SUPPORT_EMAIL`, `SUPPORT_PHONE`, `WHATSAPP_NUMBER` | Public contact. Masked placeholders by default; set a real `WHATSAPP_NUMBER` to enable WhatsApp/call links. |
 | `PAYMENT_INSTRUCTIONS` | Manual payment note |
 | `MAIL_HOST`, `MAIL_PORT`, `MAIL_USERNAME`, `MAIL_PASSWORD`, `MAIL_FROM`, `MAIL_FROM_NAME` | SMTP (optional) |
 
@@ -225,7 +225,9 @@ limitations. Highlights of what was fixed for the public release:
 - The eFootball flow stores a user-supplied in-game password — legacy behaviour,
   demo data only; never enter real credentials.
 - Payments are manual/offline; no gateway integration.
-- WhatsApp orders are simple `wa.me` hand-offs.
+- WhatsApp orders are simple `wa.me` hand-offs, but outbound WhatsApp and
+  phone links are disabled in the demo until a real `WHATSAPP_NUMBER` is set
+  in `.env` (the shipped placeholders are intentionally non-dialable).
 - `manifest.json` exists but there is no service worker (no offline support).
 - Some legacy pages duplicate markup; the public demo reuses shared helpers
   where safe.

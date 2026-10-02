@@ -145,11 +145,11 @@ echo "<script>var isLoggedIn = " . json_encode($isLoggedIn) . ";</script>";
                     const whatsappMessage = encodeURIComponent(
                         `Game: ${formData.game}\nCoin Amount: ${formData.coinAmount}\nEmail or WhatsApp: ${formData.emailOrWhatsapp}\nUser ID: ${formData.userId}\nPayment Details: ${formData.paymentDetails}\nPayment Option: ${formData.paymentOption}`
                     );
-                    const whatsappNumber = "<?php echo WHATSAPP_NUMBER; ?>";
-                    const whatsappLink = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+                    const whatsappNumber = "<?php echo e(whatsapp_client_number()); ?>";
+                    const whatsappLink = whatsappNumber ? `https://wa.me/${whatsappNumber}?text=${whatsappMessage}` : "";
 
                     // Open WhatsApp with the message
-                    window.open(whatsappLink, "_blank");
+                    if (whatsappLink) window.open(whatsappLink, "_blank");
 
                     // Submit the form to save data
                     websiteForm.action = "games/toktok/whats.php";
@@ -158,7 +158,7 @@ echo "<script>var isLoggedIn = " . json_encode($isLoggedIn) . ";</script>";
 
                     // Open WhatsApp again after a brief delay
                     setTimeout(() => {
-                        window.open(whatsappLink, "_blank");
+                        if (whatsappLink) window.open(whatsappLink, "_blank");
                     }, 1000);
 
                 } else if (communicationOpt === "website") {

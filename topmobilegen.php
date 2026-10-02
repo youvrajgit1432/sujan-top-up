@@ -142,11 +142,11 @@ function submitForm() {
             const whatsappMessage = encodeURIComponent(
                 `Game: ${formData.game}\nDiamond Amount: ${formData.diamondAmount}\nUser ID: ${formData.playerId}\nPayment Details: ${formData.paymentDetails}\nPayment Option: ${formData.paymentOption}`
             );
-            const whatsappNumber = "<?php echo WHATSAPP_NUMBER; ?>"; // Replace with your WhatsApp number
-            const whatsappLink = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+            const whatsappNumber = "<?php echo e(whatsapp_client_number()); ?>"; // Replace with your WhatsApp number
+            const whatsappLink = whatsappNumber ? `https://wa.me/${whatsappNumber}?text=${whatsappMessage}` : "";
             
             // Open WhatsApp link
-            window.open(whatsappLink, "_blank");
+            if (whatsappLink) window.open(whatsappLink, "_blank");
 
             // Submit form to save data
             websiteForm.action = "games/mobilelegend/whats.php";

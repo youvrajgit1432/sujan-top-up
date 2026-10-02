@@ -1,0 +1,220 @@
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7fa; /* Light background */
+    color: #333; /* Dark text for readability */
+    margin: 0;
+    padding: 0;
+}
+.content-wrapper {
+    padding: 10px;
+}
+
+/* Container Styling */
+.container {
+    max-width: 1700px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;  /* White background for content area */
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+/* Header styles */
+h1, h2 {
+    color: #333;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+/* Table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #747272; /* Green header for visual emphasis */
+    color: white;
+}
+
+td {
+    background-color: #ffffff;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9; /* Lighter grey for alternate rows */
+}
+
+/* Form styling */
+form {
+  
+    flex-direction: column;
+    margin-bottom: 20px;
+    width: 50%;
+}
+
+label {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+select, button {
+    padding: 10px;
+    font-size: 16px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #007bff; /* Blue button */
+    color: white;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Button color and animation */
+}
+
+button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    transform: scale(1.05); /* Slight button enlargement for interaction feedback */
+}
+
+/* Action buttons styling */
+a.update-status, a.delete-button {
+    display: block;
+    width: 100px;
+    text-align: center;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Button color and animation */
+}
+
+a.update-status:hover, a.delete-button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05); /* Slight button enlargement for interaction feedback */
+}
+
+a.update-status[data-status="confirmed"] {
+    background-color: #39a953; /* Green for confirmed */
+}
+
+a.update-status[data-status="completed"] {
+    background-color: #917d44; /* Yellow for completed */
+}
+
+a.update-status[data-status="rejected"] {
+    background-color: #cb5864; /* Red for rejected */
+}
+
+a.update-status[data-status="confirmed"]:hover {
+    background-color: #218838;
+}
+
+a.update-status[data-status="completed"]:hover {
+    background-color: #e0a800;
+}
+
+a.update-status[data-status="rejected"]:hover {
+    background-color: #c82333;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    table {
+        font-size: 14px;
+    }
+
+    form {
+        flex-direction: column;
+    }
+
+    button, select {
+        width: 100%;
+    }
+
+    a.update-status, a.delete-button {
+        width: 100%;
+    }
+}
+
+/* General Button Styling */
+button {
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.3s ease, transform 0.2s ease; /* Button color and animation */
+}
+
+/* Confirm Button */
+button.update-status[data-status="confirmed"] {
+    background-color: #4CAF50; /* Green for Confirm */
+    color: white;
+}
+
+button.update-status[data-status="confirmed"]:hover {
+    background-color: #45a049;
+}
+
+/* Complete Button */
+button.update-status[data-status="completed"] {
+    background-color: #2196F3; /* Blue for Complete */
+    color: white;
+}
+
+button.update-status[data-status="completed"]:hover {
+    background-color: #0b7dda;
+}
+
+/* Reject Button */
+button.update-status[data-status="rejected"] {
+    background-color: #f44336; /* Red for Reject */
+    color: white;
+}
+
+button.update-status[data-status="rejected"]:hover {
+    background-color: #e53935;
+}
+
+/* Delete Button */
+button.delete-button {
+    background-color: #FF9800; /* Orange for Delete */
+    color: white;
+}
+
+button.delete-button:hover {
+    background-color: #fb8c00;
+}
+
+/* Focus and Disabled States */
+button:focus {
+    outline: none;
+}
+
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* Add spacing between buttons */
+button + button {
+    margin-left: 10px;
+}
+
+/* Tooltip on Hover */
+button:hover {
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}

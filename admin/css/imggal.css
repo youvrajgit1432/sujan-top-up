@@ -1,0 +1,106 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7fc;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 2rem;
+    color: #333;
+}
+
+#imageUploadForm {
+    background-color: #fff;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    max-width: 500px;
+    margin: 20px auto;
+    border-radius: 8px;
+}
+
+#imageUploadForm label {
+    display: block;
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+    color: #555;
+}
+
+#imageUploadForm input[type="text"],
+#imageUploadForm input[type="file"],
+#imageUploadForm textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    background-color: #f9f9f9;
+}
+
+#imageUploadForm textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+#imageUploadForm input[type="file"] {
+    background-color: #e8f4fa;
+}
+
+#imageUploadForm button {
+    padding: 12px 30px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+#imageUploadForm button:hover {
+    background-color: #45a049;
+}
+
+/* Response Message Styles */
+#responseMessage {
+    text-align: center;
+    margin-top: 20px;
+    padding: 15px;
+    display: none;
+    border-radius: 8px;
+}
+
+#responseMessage span {
+    font-size: 1.1rem;
+}
+
+#responseMessage span.success {
+    color: #28a745;
+}
+
+#responseMessage span.error {
+    color: #dc3545;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    #imageUploadForm {
+        padding: 20px;
+        margin: 10px;
+    }
+
+    #imageUploadForm input[type="text"],
+    #imageUploadForm input[type="file"],
+    #imageUploadForm textarea {
+        font-size: 0.9rem;
+    }
+
+    #imageUploadForm button {
+        font-size: 1rem;
+    }
+}

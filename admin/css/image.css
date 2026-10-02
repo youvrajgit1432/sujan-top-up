@@ -1,0 +1,233 @@
+
+/* General body and layout styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+h1 {
+    text-align: center;
+    margin: 20px 0;
+}
+
+/* Card container styling */
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px;
+    padding: 20px;
+    padding-left: 250px;
+}
+
+/* Card styling */
+.card-container .card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    width: 280px; /* Fixed card width */
+    height: 350px; /* Fixed card height */
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: space-between;
+}
+
+/* Card hover effect */
+.card-container .card:hover {
+    transform: translateY(-10px); /* Slight hover effect */
+}
+
+/* Image styling */
+.card-container .card img {
+    width: 100%; /* Image fills the width of the container */
+    height: 200px; /* Fixed height for the image */
+    object-fit: cover; /* Ensures the image covers the space without distortion */
+    border-radius: 5px;
+}
+
+/* Card title styling */
+.card-container .card h3 {
+    font-size: 1.2rem;
+    margin: 10px 0;
+}
+
+/* Action button styling */
+.card-container .card .action-btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 16px;
+    background-color: #007BFF;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.card-container .card .action-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 1024px) {
+    .card-container {
+        margin-left: 0; /* Adjust content to take full width on smaller screens */
+    }
+    .card-container .card {
+        width: 100%; /* Make cards take up full width on smaller screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .card-container {
+        padding: 10px; /* Less padding on mobile devices */
+    }
+    .card-container .card {
+        width: 100%; /* Ensure cards fill the available space */
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.5rem; /* Smaller heading on small screens */
+    }
+    .card-container .card {
+        max-width: 100%; /* Cards take full width on very small screens */
+    }
+}/* Modal styling */
+
+/* Modal Background */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.6); /* Slightly darker background */
+    transition: opacity 0.3s ease; /* Smooth transition */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 30px;
+    border-radius: 8px; /* Rounded corners */
+    border: 1px solid #ddd;
+    width: 80%;
+    max-width: 500px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.5s ease;
+}
+
+/* Modal Heading */
+.modal-content h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+/* Close Button */
+.close {
+    color: #aaa;
+    font-size: 32px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.close:hover,
+.close:focus {
+    color: #e74c3c;
+    text-decoration: none;
+}
+
+/* Form Elements */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+label {
+    font-size: 16px;
+    font-weight: 600;
+    color: #555;
+}
+
+input[type="text"],
+input[type="file"] {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="file"]:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+/* Image Preview */
+#current_image {
+    margin-top: 10px;
+    max-width: 100%;
+    max-height: 150px;
+    border-radius: 5px;
+    object-fit: cover;
+}
+
+/* Save Button */
+button[type="submit"] {
+    padding: 12px 20px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #2980b9;
+}
+
+/* Response Message */
+#responseMessage {
+    margin-top: 10px;
+    font-size: 14px;
+    text-align: center;
+    padding: 8px;
+    border-radius: 5px;
+}
+
+#responseMessage span {
+    font-weight: bold;
+}
+
+/* Fade In Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

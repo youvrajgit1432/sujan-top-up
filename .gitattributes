@@ -1,0 +1,27 @@
+# Normalize line endings: store text as LF, detect binaries automatically.
+* text=auto eol=lf
+
+# Explicit binary declarations (never diff or convert these).
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.webp  binary
+*.ico   binary
+*.svg   text eol=auto
+*.woff  binary
+*.woff2 binary
+*.ttf   binary
+*.eot   binary
+*.pdf   binary
+*.zip   binary
+*.mp4   binary
+*.webm  binary
+
+# Keep Windows batch/PowerShell scripts usable on Windows.
+*.bat   text eol=crlf
+*.cmd   text eol=crlf
+
+# Mark generated/vendor assets so GitHub collapses them in diffs.
+admin/assets/** linguist-vendored
+assets/vendor/** linguist-vendored

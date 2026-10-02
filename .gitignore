@@ -1,0 +1,68 @@
+# ============================================================
+# Sujan Top-Up - .gitignore
+# Privacy-first: never commit secrets, runtime data or uploads.
+# ============================================================
+
+# ---- Environment / secrets ----
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.crt
+
+# ---- Dependency directories (reproduce with composer / npm) ----
+/vendor/
+/node_modules/
+/admin/vendor/
+/sign/vendor/
+*.lock.bak
+
+# ---- Hosting / database backups (NEVER public) ----
+backup*.tar*
+*.tar
+*.tar.gz
+*.tar.zst
+*.zip
+*.sql.gz
+/backups/
+/private/
+/database/private/
+/database/backups/
+
+# ---- Runtime user uploads (production media is private) ----
+/uploads/*
+!/uploads/.gitkeep
+/admin/uploads/*
+!/admin/uploads/.gitkeep
+
+# ---- Logs / cache / runtime ----
+/logs/
+*.log
+/cache/
+/tmp/
+/runtime/
+/sessions/
+*.session
+*.sess
+
+# ---- Generated documents ----
+*.pdf
+
+# ---- OS / editor / IDE ----
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+*.swp
+*~
+*.bak
+*.orig
+
+# ---- Sass build cache ----
+.sass-cache/
+*.css.map
+
+# NOTE: Static first-party assets under assets/ (CSS, JS, images,
+# icons) ARE tracked. Only user-uploaded runtime media is ignored.

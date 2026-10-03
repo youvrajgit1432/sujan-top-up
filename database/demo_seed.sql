@@ -58,26 +58,26 @@ INSERT INTO `games` (`game_type`, `uc_number`, `original_price`, `discounted_pri
 -- IDs are kept aligned with the legacy home page, which looks images up
 -- by a stable id. Paths point at first-party demo placeholders.
 INSERT INTO `game_images` (`id`, `game_type`, `game_name`, `image_path`) VALUES
-  (2, 'clash', 'Clash of Clans', 'assets/img/games/clash.svg'),
-  (3, 'efootball', 'eFootball Android', 'assets/img/games/efootball.svg'),
-  (4, 'freefire', 'Free Fire', 'assets/img/games/freefire.svg'),
-  (5, 'freefire_indonesia', 'Free Fire Indonesia', 'assets/img/games/freefire.svg'),
-  (6, 'efootball_ios', 'eFootball iOS', 'assets/img/games/efootball.svg'),
-  (7, 'team', 'Demo Team', 'assets/img/games/pubg.svg'),
-  (8, 'mlbb', 'Mobile Legends: Bang Bang', 'assets/img/games/mlbb.svg'),
-  (9, 'mobilelegend_indonesia', 'Mobile Legends Indonesia', 'assets/img/games/mlbb.svg'),
-  (10, 'mobilelegend', 'Mobile Legends', 'assets/img/games/mlbb.svg'),
-  (11, 'pubg', 'PUBG Mobile', 'assets/img/games/pubg.svg'),
-  (12, 'pubg_global', 'PUBG Mobile Global', 'assets/img/games/pubg-global.svg'),
-  (13, 'tiktok', 'TikTok', 'assets/img/games/tiktok.svg'),
-  (14, 'team', 'Demo Team', 'assets/img/games/pubg.svg'),
-  (15, 'team', 'Demo Team', 'assets/img/games/pubg.svg'),
-  (16, 'team', 'Demo Team', 'assets/img/games/pubg.svg'),
-  (17, 'team', 'Demo Team', 'assets/img/games/pubg.svg'),
-  (20, 'spotify', 'Spotify', 'assets/img/games/netflix.svg'),
-  (21, 'netflix', 'Netflix', 'assets/img/games/netflix.svg'),
-  (22, 'prime', 'Prime Video', 'assets/img/games/netflix.svg'),
-  (23, 'unpin', 'Unpin', 'assets/img/games/unpin.svg');
+  (2, 'clash', 'Clash of Clans', 'https://upload.wikimedia.org/wikipedia/en/5/59/Clash_of_Clans_Logo.png'),
+  (3, 'efootball', 'eFootball Android', 'https://upload.wikimedia.org/wikipedia/commons/e/ee/EFootball_logo.svg'),
+  (4, 'freefire', 'Free Fire', 'https://upload.wikimedia.org/wikipedia/en/c/c5/Logo_of_Garena_Free_Fire.png'),
+  (5, 'freefire_indonesia', 'Free Fire Indonesia', 'https://upload.wikimedia.org/wikipedia/en/c/c5/Logo_of_Garena_Free_Fire.png'),
+  (6, 'efootball_ios', 'eFootball iOS', 'https://upload.wikimedia.org/wikipedia/commons/e/ee/EFootball_logo.svg'),
+  (7, 'team', 'Demo Team', 'assets/img/avatar-placeholder.svg'),
+  (8, 'mlbb', 'Mobile Legends: Bang Bang', 'https://upload.wikimedia.org/wikipedia/en/a/a0/Mobile_Legends_Bang_Bang_2025_logo.png'),
+  (9, 'mobilelegend_indonesia', 'Mobile Legends Indonesia', 'https://upload.wikimedia.org/wikipedia/en/a/a0/Mobile_Legends_Bang_Bang_2025_logo.png'),
+  (10, 'mobilelegend', 'Mobile Legends', 'https://upload.wikimedia.org/wikipedia/en/a/a0/Mobile_Legends_Bang_Bang_2025_logo.png'),
+  (11, 'pubg', 'PUBG Mobile', 'https://upload.wikimedia.org/wikipedia/en/4/44/PlayerUnknown%27s_Battlegrounds_Mobile.webp'),
+  (12, 'pubg_global', 'PUBG Mobile Global', 'https://upload.wikimedia.org/wikipedia/en/4/44/PlayerUnknown%27s_Battlegrounds_Mobile.webp'),
+  (13, 'tiktok', 'TikTok', 'https://upload.wikimedia.org/wikipedia/commons/e/e8/Tiktok_logo.png'),
+  (14, 'team', 'Demo Team', 'assets/img/avatar-placeholder.svg'),
+  (15, 'team', 'Demo Team', 'assets/img/avatar-placeholder.svg'),
+  (16, 'team', 'Demo Team', 'assets/img/avatar-placeholder.svg'),
+  (17, 'team', 'Demo Team', 'assets/img/avatar-placeholder.svg'),
+  (20, 'spotify', 'Spotify', 'https://upload.wikimedia.org/wikipedia/commons/9/99/Black_Spotify_logo_with_text.svg'),
+  (21, 'netflix', 'Netflix', 'https://upload.wikimedia.org/wikipedia/commons/6/69/Netflix_logo.svg'),
+  (22, 'prime', 'Prime Video', 'https://upload.wikimedia.org/wikipedia/commons/9/90/Prime_Video_logo_%282024%29.svg'),
+  (23, 'unpin', 'Unpin', 'assets/img/games/generic.svg');
 
 -- ------------------------------------------------------------
 -- Fictional reviews

@@ -54,19 +54,20 @@ if (!function_exists('game_fallback_image')) {
      */
     function game_fallback_image(string $gameKey, string $gameName = ''): string
     {
+        // Real, stable HTTPS artwork for each service (validated: HTTP 200,
+        // Content-Type image/*). Kept in ONE place so no URLs live in index.php.
+        // These are hotlink-friendly upload.wikimedia.org assets (Wikimedia
+        // Commons / Wikipedia). Swap any URL here if a source ever changes.
         $map = [
-            'clash'        => 'assets/img/games/clash.svg',
-            'efootball'    => 'assets/img/games/efootball.svg',
-            'freefire'     => 'assets/img/games/freefire.svg',
-            'mlbb'         => 'assets/img/games/mlbb.svg',
-            'mobilelegend' => 'assets/img/games/mlbb.svg',
-            'pubgglobal'   => 'assets/img/games/pubg-global.svg',
-            'pubg'         => 'assets/img/games/pubg.svg',
-            'tiktok'       => 'assets/img/games/tiktok.svg',
-            'netflix'      => 'assets/img/games/netflix.svg',
-            'unpin'        => 'assets/img/games/unpin.svg',
-            'spotify'      => 'https://placehold.co/640x360/171827/FFFFFF?text=Spotify',
-            'prime'        => 'https://placehold.co/640x360/171827/FFFFFF?text=Prime+Video',
+            'pubg'         => 'https://upload.wikimedia.org/wikipedia/en/4/44/PlayerUnknown%27s_Battlegrounds_Mobile.webp',
+            'freefire'     => 'https://upload.wikimedia.org/wikipedia/en/c/c5/Logo_of_Garena_Free_Fire.png',
+            'mobilelegend' => 'https://upload.wikimedia.org/wikipedia/en/a/a0/Mobile_Legends_Bang_Bang_2025_logo.png',
+            'tiktok'       => 'https://upload.wikimedia.org/wikipedia/commons/e/e8/Tiktok_logo.png',
+            'efootball'    => 'https://upload.wikimedia.org/wikipedia/commons/e/ee/EFootball_logo.svg',
+            'clash'        => 'https://upload.wikimedia.org/wikipedia/en/5/59/Clash_of_Clans_Logo.png',
+            'netflix'      => 'https://upload.wikimedia.org/wikipedia/commons/6/69/Netflix_logo.svg',
+            'spotify'      => 'https://upload.wikimedia.org/wikipedia/commons/9/99/Black_Spotify_logo_with_text.svg',
+            'prime'        => 'https://upload.wikimedia.org/wikipedia/commons/9/90/Prime_Video_logo_%282024%29.svg',
         ];
 
         // Normalise the key/name into space-separated lowercase words so both
@@ -74,22 +75,28 @@ if (!function_exists('game_fallback_image')) {
         $haystack = strtolower($gameKey . ' ' . $gameName);
         $haystack = (string) preg_replace('/[^a-z0-9]+/', ' ', $haystack);
 
-        // Ordered longest/most-specific first so 'pubg global' wins over 'pubg'.
+        // Ordered most-specific first, so aliases like 'pubg global'/'pubg'
+        // collapse onto one key.
         $rules = [
-            'pubg global'    => 'pubgglobal',
-            'clash'          => 'clash',
-            'freefire'       => 'freefire',
-            'free fire'      => 'freefire',
-            'mobilelegend'   => 'mobilelegend',
-            'mobile legend'  => 'mobilelegend',
-            'mlbb'           => 'mlbb',
-            'tiktok'         => 'tiktok',
-            'efootball'      => 'efootball',
-            'netflix'        => 'netflix',
-            'spotify'        => 'spotify',
-            'prime'          => 'prime',
-            'unpin'          => 'unpin',
-            'pubg'           => 'pubg',
+            'pubg global'     => 'pubg',
+            'pubg mobile'     => 'pubg',
+            'pubgmobile'      => 'pubg',
+            'pubg'            => 'pubg',
+            'free fire'       => 'freefire',
+            'freefire'        => 'freefire',
+            'mobile legends'  => 'mobilelegend',
+            'mobile legend'   => 'mobilelegend',
+            'mobilelegend'    => 'mobilelegend',
+            'mlbb'            => 'mobilelegend',
+            'efootball'       => 'efootball',
+            'clash of clans'  => 'clash',
+            'clashofclans'    => 'clash',
+            'clash'           => 'clash',
+            'tiktok'          => 'tiktok',
+            'netflix'         => 'netflix',
+            'spotify'         => 'spotify',
+            'prime video'     => 'prime',
+            'prime'           => 'prime',
         ];
 
         foreach ($rules as $needle => $key) {
@@ -98,8 +105,8 @@ if (!function_exists('game_fallback_image')) {
             }
         }
 
-        // Generic safe local placeholder (final emergency fallback).
-        return 'assets/img/games/pubg.svg';
+        // Generic safe local placeholder (final emergency fallback only).
+        return 'assets/img/games/generic.svg';
     }
 }
 

@@ -427,7 +427,7 @@ if (isset($_SESSION['user_id'])) {
 <script>
   window.gameImgFallback = function (el) {
     if (!el) { return; }
-    var generic = (el.dataset && el.dataset.genericFallback) || 'assets/img/games/pubg.svg';
+    var generic = (el.dataset && el.dataset.genericFallback) || 'assets/img/games/generic.svg';
     var fallback = el.dataset && el.dataset.fallback;
     var stage = (el.dataset && el.dataset.fallbackStage) || '0';
     // Stage 0: swap in the game-specific fallback (if any) exactly once.

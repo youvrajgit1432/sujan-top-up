@@ -421,6 +421,29 @@ if (isset($_SESSION['user_id'])) {
 
 </style>
 
+<!-- Resilient game image fallback (used by the onerror attribute on game cards).
+     Two-tier: try the game-specific fallback once, then the generic local
+     placeholder. The handler clears itself so a dead fallback cannot loop. -->
+<script>
+  window.gameImgFallback = function (el) {
+    if (!el) { return; }
+    var generic = (el.dataset && el.dataset.genericFallback) || 'assets/img/games/pubg.svg';
+    var fallback = el.dataset && el.dataset.fallback;
+    var stage = (el.dataset && el.dataset.fallbackStage) || '0';
+    // Stage 0: swap in the game-specific fallback (if any) exactly once.
+    if (stage === '0' && fallback && el.getAttribute('src') !== fallback) {
+      el.dataset.fallbackStage = '1';
+      el.src = fallback;
+      return;
+    }
+    // Stage 1 (or no game-specific fallback): generic local placeholder, then
+    // stop so a dead final image can never loop.
+    el.onerror = null;
+    if (el.getAttribute('src') !== generic) {
+      el.src = generic;
+    }
+  };
+</script>
 
 </head>
 
@@ -544,7 +567,7 @@ if (isset($_SESSION['user_id'])) {
             <?php $row = $result->fetch_assoc(); // Fetch the single result ?>
             
                 <!-- Adjust the path here based on the location of uploads directory -->
-                <img src="<?php echo e(game_image_src($row["image_path"])); ?>"onclick="openModal('pubg')"
+                <img src="<?php echo e(game_image_src($row["image_path"] ?? '', $row["game_type"] ?? '', $row["game_name"] ?? '')); ?>" data-fallback="<?php echo e(game_fallback_image($row["game_type"] ?? '', $row["game_name"] ?? '')); ?>" onerror="gameImgFallback(this)" onclick="openModal('pubg')"
                  alt="Game Image"style="width: 100%; height: 100%; object-fit: cover;" class="game-image">
                 <h3><?php echo htmlspecialchars($row['game_type']); ?></h3>
                 <button class="action-btn" onclick="openModal('<?php echo urlencode($row['game_type']); ?>', '<?php echo htmlspecialchars($row['image_path']); ?>')">Edit</button>
@@ -571,7 +594,7 @@ if (isset($_SESSION['user_id'])) {
             <?php $row = $result->fetch_assoc(); // Fetch the single result ?>
             
                 <!-- Adjust the path here based on the location of uploads directory -->
-                <img src="<?php echo e(game_image_src($row["image_path"])); ?>"  onclick="openModal('clash')" alt="Game Image"style="width: 100%; height: 100%; object-fit: cover;" class="game-image">
+                <img src="<?php echo e(game_image_src($row["image_path"] ?? '', $row["game_type"] ?? '', $row["game_name"] ?? '')); ?>" data-fallback="<?php echo e(game_fallback_image($row["game_type"] ?? '', $row["game_name"] ?? '')); ?>" onerror="gameImgFallback(this)"   onclick="openModal('clash')" alt="Game Image"style="width: 100%; height: 100%; object-fit: cover;" class="game-image">
                 <h3><?php echo htmlspecialchars($row['game_type']); ?></h3>
                 <button class="action-btn" onclick="openModal('<?php echo urlencode($row['game_type']); ?>', '<?php echo htmlspecialchars($row['image_path']); ?>')">Edit</button>
            
@@ -596,7 +619,7 @@ if (isset($_SESSION['user_id'])) {
             <?php $row = $result->fetch_assoc(); // Fetch the single result ?>
             
                 <!-- Adjust the path here based on the location of uploads directory -->
-                <img src="<?php echo e(game_image_src($row["image_path"])); ?>" onclick="openModal('mobilelegends')"alt="Game Image"style="width: 100%; height: 100%; object-fit: cover;" class="game-image">
+                <img src="<?php echo e(game_image_src($row["image_path"] ?? '', $row["game_type"] ?? '', $row["game_name"] ?? '')); ?>" data-fallback="<?php echo e(game_fallback_image($row["game_type"] ?? '', $row["game_name"] ?? '')); ?>" onerror="gameImgFallback(this)"  onclick="openModal('mobilelegends')"alt="Game Image"style="width: 100%; height: 100%; object-fit: cover;" class="game-image">
                 <h3><?php echo htmlspecialchars($row['game_type']); ?></h3>
                 <button class="action-btn" onclick="openModal('<?php echo urlencode($row['game_type']); ?>', '<?php echo htmlspecialchars($row['image_path']); ?>')">Edit</button>
            
@@ -621,7 +644,7 @@ if (isset($_SESSION['user_id'])) {
             <?php $row = $result->fetch_assoc(); // Fetch the single result ?>
             
                 <!-- Adjust the path here based on the location of uploads directory -->
-                <img src="<?php echo e(game_image_src($row["image_path"])); ?>"onclick="openModal('freefire')" alt="Game Image"style="width: 100%; height: 100%; object-fit: cover;" class="game-image">
+                <img src="<?php echo e(game_image_src($row["image_path"] ?? '', $row["game_type"] ?? '', $row["game_name"] ?? '')); ?>" data-fallback="<?php echo e(game_fallback_image($row["game_type"] ?? '', $row["game_name"] ?? '')); ?>" onerror="gameImgFallback(this)" onclick="openModal('freefire')" alt="Game Image"style="width: 100%; height: 100%; object-fit: cover;" class="game-image">
                 <h3><?php echo htmlspecialchars($row['game_type']); ?></h3>
                 <button class="action-btn" onclick="openModal('<?php echo urlencode($row['game_type']); ?>', '<?php echo htmlspecialchars($row['image_path']); ?>')">Edit</button>
            
@@ -645,7 +668,7 @@ if (isset($_SESSION['user_id'])) {
             <?php $row = $result->fetch_assoc(); // Fetch the single result ?>
             
                 <!-- Adjust the path here based on the location of uploads directory -->
-                <img src="<?php echo e(game_image_src($row["image_path"])); ?>" alt="Game Image"style="width: 100%; height: 100%;
+                <img src="<?php echo e(game_image_src($row["image_path"] ?? '', $row["game_type"] ?? '', $row["game_name"] ?? '')); ?>" data-fallback="<?php echo e(game_fallback_image($row["game_type"] ?? '', $row["game_name"] ?? '')); ?>" onerror="gameImgFallback(this)"  alt="Game Image"style="width: 100%; height: 100%;
                  object-fit: cover;" class="game-image"  onclick="openModal('efootball-pes-2025')">
                 <h3><?php echo htmlspecialchars($row['game_type']); ?></h3>
                 <button class="action-btn" onclick="openModal('<?php echo urlencode($row['game_type']); ?>', '<?php echo htmlspecialchars($row['image_path']); ?>')">Edit</button>
@@ -736,7 +759,7 @@ if (isset($_SESSION['user_id'])) {
             <?php $row = $result->fetch_assoc(); // Fetch the single result ?>
             
                 <!-- Adjust the path here based on the location of uploads directory -->
-                <img src="<?php echo e(game_image_src($row["image_path"])); ?>" alt="Game Image"style="width: 100%; height: 100%; 
+                <img src="<?php echo e(game_image_src($row["image_path"] ?? '', $row["game_type"] ?? '', $row["game_name"] ?? '')); ?>" data-fallback="<?php echo e(game_fallback_image($row["game_type"] ?? '', $row["game_name"] ?? '')); ?>" onerror="gameImgFallback(this)"  alt="Game Image"style="width: 100%; height: 100%;
                 object-fit: cover;" class="game-image">
                 <h3><?php echo htmlspecialchars($row['game_type']); ?></h3>
                 <button class="action-btn" onclick="openModal('<?php echo urlencode($row['game_type']); ?>', '<?php echo htmlspecialchars($row['image_path']); ?>')">Edit</button>
@@ -770,7 +793,7 @@ if (isset($_SESSION['user_id'])) {
             <?php $row = $result->fetch_assoc(); // Fetch the single result ?>
             
                 <!-- Adjust the path here based on the location of uploads directory -->
-                <img src="<?php echo e(game_image_src($row["image_path"])); ?>" alt="Game Image"style="width: 100%; height: 100%; object-fit: cover;" class="game-image">
+                <img src="<?php echo e(game_image_src($row["image_path"] ?? '', $row["game_type"] ?? '', $row["game_name"] ?? '')); ?>" data-fallback="<?php echo e(game_fallback_image($row["game_type"] ?? '', $row["game_name"] ?? '')); ?>" onerror="gameImgFallback(this)"  alt="Game Image"style="width: 100%; height: 100%; object-fit: cover;" class="game-image">
                 <h3><?php echo htmlspecialchars($row['game_type']); ?></h3>
                 <button class="action-btn" onclick="openModal('<?php echo urlencode($row['game_type']); ?>', '<?php echo htmlspecialchars($row['image_path']); ?>')">Edit</button>
            
@@ -803,7 +826,7 @@ if (isset($_SESSION['user_id'])) {
             <?php $row = $result->fetch_assoc(); // Fetch the single result ?>
             
                 <!-- Adjust the path here based on the location of uploads directory -->
-                <img src="<?php echo e(game_image_src($row["image_path"])); ?>" alt="Game Image"style="width: 100%; height: 100%; object-fit: cover;" class="game-image">
+                <img src="<?php echo e(game_image_src($row["image_path"] ?? '', $row["game_type"] ?? '', $row["game_name"] ?? '')); ?>" data-fallback="<?php echo e(game_fallback_image($row["game_type"] ?? '', $row["game_name"] ?? '')); ?>" onerror="gameImgFallback(this)"  alt="Game Image"style="width: 100%; height: 100%; object-fit: cover;" class="game-image">
                 <h3><?php echo htmlspecialchars($row['game_type']); ?></h3>
                 <button class="action-btn" onclick="openModal('<?php echo urlencode($row['game_type']); ?>', '<?php echo htmlspecialchars($row['image_path']); ?>')">Edit</button>
            
@@ -836,7 +859,7 @@ if (isset($_SESSION['user_id'])) {
             <?php $row = $result->fetch_assoc(); // Fetch the single result ?>
             
                 <!-- Adjust the path here based on the location of uploads directory -->
-                <img src="<?php echo e(game_image_src($row["image_path"])); ?>" alt="Game Image"style="width: 100%; height: 100%; object-fit: cover;" class="game-image">
+                <img src="<?php echo e(game_image_src($row["image_path"] ?? '', $row["game_type"] ?? '', $row["game_name"] ?? '')); ?>" data-fallback="<?php echo e(game_fallback_image($row["game_type"] ?? '', $row["game_name"] ?? '')); ?>" onerror="gameImgFallback(this)"  alt="Game Image"style="width: 100%; height: 100%; object-fit: cover;" class="game-image">
                 <h3><?php echo htmlspecialchars($row['game_type']); ?></h3>
                 <button class="action-btn" onclick="openModal('<?php echo urlencode($row['game_type']); ?>', '<?php echo htmlspecialchars($row['image_path']); ?>')">Edit</button>
            
@@ -869,7 +892,7 @@ if (isset($_SESSION['user_id'])) {
             <?php $row = $result->fetch_assoc(); // Fetch the single result ?>
             
                 <!-- Adjust the path here based on the location of uploads directory -->
-                <img src="<?php echo e(game_image_src($row["image_path"])); ?>" alt="Game Image"style="width: 100%; height: 100%; object-fit: cover;" class="game-image">
+                <img src="<?php echo e(game_image_src($row["image_path"] ?? '', $row["game_type"] ?? '', $row["game_name"] ?? '')); ?>" data-fallback="<?php echo e(game_fallback_image($row["game_type"] ?? '', $row["game_name"] ?? '')); ?>" onerror="gameImgFallback(this)"  alt="Game Image"style="width: 100%; height: 100%; object-fit: cover;" class="game-image">
                 <h3><?php echo htmlspecialchars($row['game_type']); ?></h3>
                 <button class="action-btn" onclick="openModal('<?php echo urlencode($row['game_type']); ?>', '<?php echo htmlspecialchars($row['image_path']); ?>')">Edit</button>
            
@@ -902,7 +925,7 @@ if (isset($_SESSION['user_id'])) {
             <?php $row = $result->fetch_assoc(); // Fetch the single result ?>
             
                 <!-- Adjust the path here based on the location of uploads directory -->
-                <img src="<?php echo e(game_image_src($row["image_path"])); ?>" alt="Game Image"style="width: 100%; height: 100%; object-fit: cover;" class="game-image">
+                <img src="<?php echo e(game_image_src($row["image_path"] ?? '', $row["game_type"] ?? '', $row["game_name"] ?? '')); ?>" data-fallback="<?php echo e(game_fallback_image($row["game_type"] ?? '', $row["game_name"] ?? '')); ?>" onerror="gameImgFallback(this)"  alt="Game Image"style="width: 100%; height: 100%; object-fit: cover;" class="game-image">
                 <h3><?php echo htmlspecialchars($row['game_type']); ?></h3>
                 <button class="action-btn" onclick="openModal('<?php echo urlencode($row['game_type']); ?>', '<?php echo htmlspecialchars($row['image_path']); ?>')">Edit</button>
            
@@ -935,7 +958,7 @@ if (isset($_SESSION['user_id'])) {
             <?php $row = $result->fetch_assoc(); // Fetch the single result ?>
             
                 <!-- Adjust the path here based on the location of uploads directory -->
-                <img src="<?php echo e(game_image_src($row["image_path"])); ?>" alt="Game Image"style="width: 100%; height: 100%; object-fit: cover;" class="game-image">
+                <img src="<?php echo e(game_image_src($row["image_path"] ?? '', $row["game_type"] ?? '', $row["game_name"] ?? '')); ?>" data-fallback="<?php echo e(game_fallback_image($row["game_type"] ?? '', $row["game_name"] ?? '')); ?>" onerror="gameImgFallback(this)"  alt="Game Image"style="width: 100%; height: 100%; object-fit: cover;" class="game-image">
                 <h3><?php echo htmlspecialchars($row['game_type']); ?></h3>
                 <button class="action-btn" onclick="openModal('<?php echo urlencode($row['game_type']); ?>', '<?php echo htmlspecialchars($row['image_path']); ?>')">Edit</button>
            
@@ -968,7 +991,7 @@ if (isset($_SESSION['user_id'])) {
             <?php $row = $result->fetch_assoc(); // Fetch the single result ?>
             
                 <!-- Adjust the path here based on the location of uploads directory -->
-                <img src="<?php echo e(game_image_src($row["image_path"])); ?>" alt="Game Image"style="width: 100%; height: 100%; object-fit: cover;" class="game-image">
+                <img src="<?php echo e(game_image_src($row["image_path"] ?? '', $row["game_type"] ?? '', $row["game_name"] ?? '')); ?>" data-fallback="<?php echo e(game_fallback_image($row["game_type"] ?? '', $row["game_name"] ?? '')); ?>" onerror="gameImgFallback(this)"  alt="Game Image"style="width: 100%; height: 100%; object-fit: cover;" class="game-image">
                 <h3><?php echo htmlspecialchars($row['game_type']); ?></h3>
                 <button class="action-btn" onclick="openModal('<?php echo urlencode($row['game_type']); ?>', '<?php echo htmlspecialchars($row['image_path']); ?>')">Edit</button>
            
@@ -1001,7 +1024,7 @@ if (isset($_SESSION['user_id'])) {
             <?php $row = $result->fetch_assoc(); // Fetch the single result ?>
             
                 <!-- Adjust the path here based on the location of uploads directory -->
-                <img src="<?php echo e(game_image_src($row["image_path"])); ?>" alt="Game Image"style="width: 100%; height: 100%; object-fit: cover;" class="game-image">
+                <img src="<?php echo e(game_image_src($row["image_path"] ?? '', $row["game_type"] ?? '', $row["game_name"] ?? '')); ?>" data-fallback="<?php echo e(game_fallback_image($row["game_type"] ?? '', $row["game_name"] ?? '')); ?>" onerror="gameImgFallback(this)"  alt="Game Image"style="width: 100%; height: 100%; object-fit: cover;" class="game-image">
                 <h3><?php echo htmlspecialchars($row['game_type']); ?></h3>
                 <button class="action-btn" onclick="openModal('<?php echo urlencode($row['game_type']); ?>', '<?php echo htmlspecialchars($row['image_path']); ?>')">Edit</button>
            
@@ -1034,7 +1057,7 @@ if (isset($_SESSION['user_id'])) {
             <?php $row = $result->fetch_assoc(); // Fetch the single result ?>
             
                 <!-- Adjust the path here based on the location of uploads directory -->
-                <img src="<?php echo e(game_image_src($row["image_path"])); ?>" alt="Game Image"style="width: 100%; height: 100%; object-fit: cover;" class="game-image">
+                <img src="<?php echo e(game_image_src($row["image_path"] ?? '', $row["game_type"] ?? '', $row["game_name"] ?? '')); ?>" data-fallback="<?php echo e(game_fallback_image($row["game_type"] ?? '', $row["game_name"] ?? '')); ?>" onerror="gameImgFallback(this)"  alt="Game Image"style="width: 100%; height: 100%; object-fit: cover;" class="game-image">
                 <h3><?php echo htmlspecialchars($row['game_type']); ?></h3>
                 <button class="action-btn" onclick="openModal('<?php echo urlencode($row['game_type']); ?>', '<?php echo htmlspecialchars($row['image_path']); ?>')">Edit</button>
            
@@ -1067,7 +1090,7 @@ if (isset($_SESSION['user_id'])) {
             <?php $row = $result->fetch_assoc(); // Fetch the single result ?>
             
                 <!-- Adjust the path here based on the location of uploads directory -->
-                <img src="<?php echo e(game_image_src($row["image_path"])); ?>" alt="Game Image"style="width: 100%; height: 100%; object-fit: cover;" class="game-image">
+                <img src="<?php echo e(game_image_src($row["image_path"] ?? '', $row["game_type"] ?? '', $row["game_name"] ?? '')); ?>" data-fallback="<?php echo e(game_fallback_image($row["game_type"] ?? '', $row["game_name"] ?? '')); ?>" onerror="gameImgFallback(this)"  alt="Game Image"style="width: 100%; height: 100%; object-fit: cover;" class="game-image">
                 <h3><?php echo htmlspecialchars($row['game_type']); ?></h3>
                 <button class="action-btn" onclick="openModal('<?php echo urlencode($row['game_type']); ?>', '<?php echo htmlspecialchars($row['image_path']); ?>')">Edit</button>
            
@@ -1100,7 +1123,7 @@ if (isset($_SESSION['user_id'])) {
             <?php $row = $result->fetch_assoc(); // Fetch the single result ?>
             
                 <!-- Adjust the path here based on the location of uploads directory -->
-                <img src="<?php echo e(game_image_src($row["image_path"])); ?>" alt="Game Image"style="width: 100%; height: 100%; object-fit: cover;" class="game-image">
+                <img src="<?php echo e(game_image_src($row["image_path"] ?? '', $row["game_type"] ?? '', $row["game_name"] ?? '')); ?>" data-fallback="<?php echo e(game_fallback_image($row["game_type"] ?? '', $row["game_name"] ?? '')); ?>" onerror="gameImgFallback(this)"  alt="Game Image"style="width: 100%; height: 100%; object-fit: cover;" class="game-image">
                 <h3><?php echo htmlspecialchars($row['game_type']); ?></h3>
                 <button class="action-btn" onclick="openModal('<?php echo urlencode($row['game_type']); ?>', '<?php echo htmlspecialchars($row['image_path']); ?>')">Edit</button>
            
@@ -1133,7 +1156,7 @@ if (isset($_SESSION['user_id'])) {
             <?php $row = $result->fetch_assoc(); // Fetch the single result ?>
             
                 <!-- Adjust the path here based on the location of uploads directory -->
-                <img src="<?php echo e(game_image_src($row["image_path"])); ?>" 
+                <img src="<?php echo e(game_image_src($row["image_path"] ?? '', $row["game_type"] ?? '', $row["game_name"] ?? '')); ?>" data-fallback="<?php echo e(game_fallback_image($row["game_type"] ?? '', $row["game_name"] ?? '')); ?>" onerror="gameImgFallback(this)"
                 alt="Game Image"style="width: 100%; height: 100%; object-fit: cover;" class="game-image">
                 <h3><?php echo htmlspecialchars($row['game_type']); ?></h3>
                 <button class="action-btn" onclick="openModal('<?php echo urlencode($row['game_type']); ?>',
@@ -1168,7 +1191,7 @@ if (isset($_SESSION['user_id'])) {
             <?php $row = $result->fetch_assoc(); // Fetch the single result ?>
             
                 <!-- Adjust the path here based on the location of uploads directory -->
-                <img src="<?php echo e(game_image_src($row["image_path"])); ?>"
+                <img src="<?php echo e(game_image_src($row["image_path"] ?? '', $row["game_type"] ?? '', $row["game_name"] ?? '')); ?>" data-fallback="<?php echo e(game_fallback_image($row["game_type"] ?? '', $row["game_name"] ?? '')); ?>" onerror="gameImgFallback(this)"
                  alt="Game Image"style="width: 100%; height: 100%; object-fit: cover;" class="game-image">
                 <h3><?php echo htmlspecialchars($row['game_type']); ?></h3>
                 <button class="action-btn" onclick="openModal('<?php echo urlencode($row['game_type']); ?>',
@@ -1204,7 +1227,7 @@ if (isset($_SESSION['user_id'])) {
             <?php $row = $result->fetch_assoc(); // Fetch the single result ?>
             
                 <!-- Adjust the path here based on the location of uploads directory -->
-                <img src="<?php echo e(game_image_src($row["image_path"])); ?>"
+                <img src="<?php echo e(game_image_src($row["image_path"] ?? '', $row["game_type"] ?? '', $row["game_name"] ?? '')); ?>" data-fallback="<?php echo e(game_fallback_image($row["game_type"] ?? '', $row["game_name"] ?? '')); ?>" onerror="gameImgFallback(this)"
                  alt="Game Image"style="width: 100%; height: 100%; object-fit: cover;" class="game-image">
                 <h3><?php echo htmlspecialchars($row['game_type']); ?></h3>
                 <button class="action-btn" onclick="openModal('<?php echo urlencode($row['game_type']); ?>', '<?php echo htmlspecialchars($row['image_path']); ?>')">Edit</button>
@@ -2189,7 +2212,7 @@ $result = $conn->query($query);
             <?php $row = $result->fetch_assoc(); // Fetch the single result ?>
             
                 <!-- Adjust the path here based on the location of uploads directory -->
-                <img src="<?php echo e(game_image_src($row["image_path"])); ?>" alt="Game Image" style="width: 100%; height: 100%; object-fit: cover;" class="game-image">
+                <img src="<?php echo e(game_image_src($row["image_path"] ?? '', $row["game_type"] ?? '', $row["game_name"] ?? '')); ?>" data-fallback="<?php echo e(game_fallback_image($row["game_type"] ?? '', $row["game_name"] ?? '')); ?>" onerror="gameImgFallback(this)"  alt="Game Image" style="width: 100%; height: 100%; object-fit: cover;" class="game-image">
           
         <?php else: ?>
             <p>No games found.</p>
@@ -2224,7 +2247,7 @@ $result = $conn->query($query);
             <?php $row = $result->fetch_assoc(); // Fetch the single result ?>
             
                 <!-- Adjust the path here based on the location of uploads directory -->
-                <img src="<?php echo e(game_image_src($row["image_path"])); ?>" alt="Game Image" style="width: 100%; height: 100%; object-fit: cover;" class="game-image">
+                <img src="<?php echo e(game_image_src($row["image_path"] ?? '', $row["game_type"] ?? '', $row["game_name"] ?? '')); ?>" data-fallback="<?php echo e(game_fallback_image($row["game_type"] ?? '', $row["game_name"] ?? '')); ?>" onerror="gameImgFallback(this)"  alt="Game Image" style="width: 100%; height: 100%; object-fit: cover;" class="game-image">
           
         <?php else: ?>
             <p>No games found.</p>
@@ -2259,7 +2282,7 @@ $result = $conn->query($query);
             <?php $row = $result->fetch_assoc(); // Fetch the single result ?>
             
                 <!-- Adjust the path here based on the location of uploads directory -->
-                <img src="<?php echo e(game_image_src($row["image_path"])); ?>" alt="Game Image" style="width: 100%; height: 100%; object-fit: cover;" class="game-image">
+                <img src="<?php echo e(game_image_src($row["image_path"] ?? '', $row["game_type"] ?? '', $row["game_name"] ?? '')); ?>" data-fallback="<?php echo e(game_fallback_image($row["game_type"] ?? '', $row["game_name"] ?? '')); ?>" onerror="gameImgFallback(this)"  alt="Game Image" style="width: 100%; height: 100%; object-fit: cover;" class="game-image">
           
         <?php else: ?>
             <p>No games found.</p>
@@ -2294,7 +2317,7 @@ $result = $conn->query($query);
             <?php $row = $result->fetch_assoc(); // Fetch the single result ?>
             
                 <!-- Adjust the path here based on the location of uploads directory -->
-                <img src="<?php echo e(game_image_src($row["image_path"])); ?>" alt="Game Image" style="width: 100%; height: 100%; object-fit: cover;" class="game-image">
+                <img src="<?php echo e(game_image_src($row["image_path"] ?? '', $row["game_type"] ?? '', $row["game_name"] ?? '')); ?>" data-fallback="<?php echo e(game_fallback_image($row["game_type"] ?? '', $row["game_name"] ?? '')); ?>" onerror="gameImgFallback(this)"  alt="Game Image" style="width: 100%; height: 100%; object-fit: cover;" class="game-image">
           
         <?php else: ?>
             <p>No games found.</p>
@@ -2330,7 +2353,7 @@ $result = $conn->query($query);
             <?php $row = $result->fetch_assoc(); // Fetch the single result ?>
             
                 <!-- Adjust the path here based on the location of uploads directory -->
-                <img src="<?php echo e(game_image_src($row["image_path"])); ?>" alt="Game Image" style="width: 100%; height: 100%; object-fit: cover;" class="game-image">
+                <img src="<?php echo e(game_image_src($row["image_path"] ?? '', $row["game_type"] ?? '', $row["game_name"] ?? '')); ?>" data-fallback="<?php echo e(game_fallback_image($row["game_type"] ?? '', $row["game_name"] ?? '')); ?>" onerror="gameImgFallback(this)"  alt="Game Image" style="width: 100%; height: 100%; object-fit: cover;" class="game-image">
           
         <?php else: ?>
             <p>No games found.</p>

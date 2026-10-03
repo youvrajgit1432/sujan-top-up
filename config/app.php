@@ -40,26 +40,124 @@ if (!function_exists('e')) {
     }
 }
 
+if (!function_exists('game_fallback_image')) {
+    /**
+     * Central fallback map for game/service card images.
+     *
+     * Used only when the stored image is empty, missing or unusable. Local
+     * first-party SVGs are always preferred; a game without a local asset
+     * falls back to a stable remote placeholder. The final emergency
+     * fallback is the generic local placeholder returned at the end.
+     *
+     * @param string $gameKey  Game type/key from the database (e.g. 'pubg').
+     * @param string $gameName Human-readable game name (secondary hint).
+     */
+    function game_fallback_image(string $gameKey, string $gameName = ''): string
+    {
+        $map = [
+            'clash'        => 'assets/img/games/clash.svg',
+            'efootball'    => 'assets/img/games/efootball.svg',
+            'freefire'     => 'assets/img/games/freefire.svg',
+            'mlbb'         => 'assets/img/games/mlbb.svg',
+            'mobilelegend' => 'assets/img/games/mlbb.svg',
+            'pubgglobal'   => 'assets/img/games/pubg-global.svg',
+            'pubg'         => 'assets/img/games/pubg.svg',
+            'tiktok'       => 'assets/img/games/tiktok.svg',
+            'netflix'      => 'assets/img/games/netflix.svg',
+            'unpin'        => 'assets/img/games/unpin.svg',
+            'spotify'      => 'https://placehold.co/640x360/171827/FFFFFF?text=Spotify',
+            'prime'        => 'https://placehold.co/640x360/171827/FFFFFF?text=Prime+Video',
+        ];
+
+        // Normalise the key/name into space-separated lowercase words so both
+        // 'pubg_global', 'pubg-global' and 'Pubg Global' match the same rule.
+        $haystack = strtolower($gameKey . ' ' . $gameName);
+        $haystack = (string) preg_replace('/[^a-z0-9]+/', ' ', $haystack);
+
+        // Ordered longest/most-specific first so 'pubg global' wins over 'pubg'.
+        $rules = [
+            'pubg global'    => 'pubgglobal',
+            'clash'          => 'clash',
+            'freefire'       => 'freefire',
+            'free fire'      => 'freefire',
+            'mobilelegend'   => 'mobilelegend',
+            'mobile legend'  => 'mobilelegend',
+            'mlbb'           => 'mlbb',
+            'tiktok'         => 'tiktok',
+            'efootball'      => 'efootball',
+            'netflix'        => 'netflix',
+            'spotify'        => 'spotify',
+            'prime'          => 'prime',
+            'unpin'          => 'unpin',
+            'pubg'           => 'pubg',
+        ];
+
+        foreach ($rules as $needle => $key) {
+            if (str_contains($haystack, $needle) && isset($map[$key])) {
+                return $map[$key];
+            }
+        }
+
+        // Generic safe local placeholder (final emergency fallback).
+        return 'assets/img/games/pubg.svg';
+    }
+}
+
 if (!function_exists('game_image_src')) {
     /**
      * Resolve a stored image path for display.
      *
-     * Legacy rows store paths relative to uploads/ (sometimes with a
-     * '../uploads/' prefix), while the public demo seeds first-party paths
-     * under assets/. This normalises both so no asset 404s.
+     * Priority:
+     *   A. explicit http(s):// URL          -> returned validated, unchanged
+     *   B. existing first-party asset       -> assets/...
+     *   C. existing legacy upload          -> uploads/...
+     *   D. game-specific configured fallback
+     *   E. generic local placeholder
+     *
+     * A missing/blank/broken database image therefore never renders as an
+     * empty dark box. This also supports admin-supplied external image URLs
+     * by never prepending 'uploads/' to an http(s) URL.
      */
-    function game_image_src($path): string
+    function game_image_src($path, string $gameKey = '', string $gameName = ''): string
     {
-        $path = ltrim((string) $path, '/\\');
+        $path = trim((string) $path);
+
+        // A. External URL - validate and return unchanged.
+        if ($path !== '' && preg_match('#^https?://#i', $path) === 1) {
+            return filter_var($path, FILTER_VALIDATE_URL) !== false
+                ? $path
+                : game_fallback_image($gameKey, $gameName);
+        }
+
         if ($path === '') {
-            return 'assets/img/games/pubg.svg';
+            return game_fallback_image($gameKey, $gameName);
         }
-        if (str_starts_with($path, 'assets/')) {
-            return $path;
+
+        $relative = ltrim($path, '/\\');
+
+        // B. First-party asset.
+        if (str_starts_with($relative, 'assets/')) {
+            return is_file(SUJAN_ROOT . '/' . $relative)
+                ? $relative
+                : game_fallback_image($gameKey, $gameName);
         }
-        $path = preg_replace('#^\.\./uploads/#', '', $path);
-        $path = preg_replace('#^uploads/#', '', $path);
-        return 'uploads/' . $path;
+
+        // C. Legacy uploads/ path (optionally with a '../' prefix).
+        $relative = (string) preg_replace('#^(\.\./|\.\.\\\\|[\/\\\\])+#', '', $relative);
+        if (str_starts_with($relative, 'uploads/')) {
+            return is_file(SUJAN_ROOT . '/' . $relative)
+                ? $relative
+                : game_fallback_image($gameKey, $gameName);
+        }
+
+        // D. Bare filename or other relative path - assume uploads/.
+        $candidate = 'uploads/' . ltrim($relative, '/\\');
+        if (is_file(SUJAN_ROOT . '/' . $candidate)) {
+            return $candidate;
+        }
+
+        // E. Nothing usable - game-specific or generic fallback.
+        return game_fallback_image($gameKey, $gameName);
     }
 }
 

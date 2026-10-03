@@ -28,7 +28,7 @@ before deletion. Nothing was permanently destroyed.
 | `ss.php` (root) | DEAD | Duplicate of `admin/ss.php`; superseded by `payment_proof.php`. |
 | `pptop.php` | DEAD | Unreferenced, superseded by `ptptop.php`. |
 | `t_spotoppti.php` | DEAD | Unreferenced. |
-| `secondary.php` | DEAD | Router used only by the removed `mmain.js` flow. |
+| `secondary.php` | RESTORED | Game-selection router used by the homepage "Top-up Now" buttons (`mmain.js`); restored and sanitized (was wrongly classified as dead). |
 | `fetch_notifications.php` | DEAD | Hard-coded placeholder database credentials; unused. |
 | `dbcon_backup.php` | DEAD | Duplicate database credentials file. |
 | `billing_page.php` | DEAD | Queried columns that never existed; unreferenced. |

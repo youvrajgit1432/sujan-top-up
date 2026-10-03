@@ -25,6 +25,13 @@ function sanitizeInput(input) {
   }
   
   // Password strength check (at least 8 characters, one uppercase, one number, and one special character)
+  function validatePasswordStrength(password) {
+      if (typeof password !== 'string') return false;
+      return password.length >= 8
+          && /[A-Z]/.test(password)
+          && /[0-9]/.test(password)
+          && /[^A-Za-z0-9]/.test(password);
+  }
  
   
   // Function to prevent SQL Injection attacks by escaping dangerous characters
@@ -34,13 +41,13 @@ function sanitizeInput(input) {
   
   // Function to set maximum length restrictions for inputs
   function setInputLengthRestrictions() {
-      document.getElementById("playerId").setAttribute("maxlength", 16);  // Limit Player ID to 30 characters
-      document.getElementById("paymentDetails").setAttribute("maxlength", 16);  // Limit Remarks to 30 characters
-      document.getElementById("userId").setAttribute("maxlength", 16);  // Limit Mobile Legends User ID to 30 characters
-      document.getElementById("zoneId").setAttribute("maxlength", 16);  // Limit Zone ID to 30 characters
-      document.getElementById("supercellEmail").setAttribute("maxlength", 30);  // Limit Supercell Email to 30 characters
-      document.getElementById("konamiEmail").setAttribute("maxlength", 30);  // Limit Konami Email to 30 characters
-      document.getElementById("password").setAttribute("maxlength", 16);  // Limit Password to 30 characters
+      { const el_ = document.getElementById("playerId"); if (el_) el_.setAttribute("maxlength", 16); }  // Limit Player ID to 30 characters
+      { const el_ = document.getElementById("paymentDetails"); if (el_) el_.setAttribute("maxlength", 16); }  // Limit Remarks to 30 characters
+      { const el_ = document.getElementById("userId"); if (el_) el_.setAttribute("maxlength", 16); }  // Limit Mobile Legends User ID to 30 characters
+      { const el_ = document.getElementById("zoneId"); if (el_) el_.setAttribute("maxlength", 16); }  // Limit Zone ID to 30 characters
+      { const el_ = document.getElementById("supercellEmail"); if (el_) el_.setAttribute("maxlength", 30); }  // Limit Supercell Email to 30 characters
+      { const el_ = document.getElementById("konamiEmail"); if (el_) el_.setAttribute("maxlength", 30); }  // Limit Konami Email to 30 characters
+      { const el_ = document.getElementById("password"); if (el_) el_.setAttribute("maxlength", 16); }  // Limit Password to 30 characters
   }
   
   // Function to enforce input length validation during input
@@ -117,25 +124,25 @@ function sanitizeInput(input) {
   
   // Attach the event listener to input fields for length enforcement
   function addInputListeners() {
-      document.getElementById("playerId").addEventListener('input', enforceMaxLength);
-      document.getElementById("paymentDetails").addEventListener('input', enforceMaxLength);
-      document.getElementById("userId").addEventListener('input', enforceMaxLength);
-      document.getElementById("zoneId").addEventListener('input', enforceMaxLength);
-      document.getElementById("supercellEmail").addEventListener('input', enforceMaxLength);
-      document.getElementById("konamiEmail").addEventListener('input', enforceMaxLength);
-      document.getElementById("password").addEventListener('input', enforceMaxLength);
+      { const el_ = document.getElementById("playerId"); if (el_) el_.addEventListener('input', enforceMaxLength); }
+      { const el_ = document.getElementById("paymentDetails"); if (el_) el_.addEventListener('input', enforceMaxLength); }
+      { const el_ = document.getElementById("userId"); if (el_) el_.addEventListener('input', enforceMaxLength); }
+      { const el_ = document.getElementById("zoneId"); if (el_) el_.addEventListener('input', enforceMaxLength); }
+      { const el_ = document.getElementById("supercellEmail"); if (el_) el_.addEventListener('input', enforceMaxLength); }
+      { const el_ = document.getElementById("konamiEmail"); if (el_) el_.addEventListener('input', enforceMaxLength); }
+      { const el_ = document.getElementById("password"); if (el_) el_.addEventListener('input', enforceMaxLength); }
   }
   
   // Real-time feedback function (for immediate validation feedback)
   function realTimeValidation(event) {
       const targetId = event.target.id;
       if (targetId === "password" && !validatePasswordStrength(event.target.value)) {
-          document.getElementById("passwordError").innerText = "Password is too weak!";
+          { const el_ = document.getElementById("passwordError"); if (el_) el_.innerText = "Password is too weak!"; }
       } else if (targetId === "supercellEmail" && !validateEmail(event.target.value)) {
-          document.getElementById("emailError").innerText = "Invalid email format!";
+          { const el_ = document.getElementById("emailError"); if (el_) el_.innerText = "Invalid email format!"; }
       } else {
-          document.getElementById("passwordError").innerText = "";
-          document.getElementById("emailError").innerText = "";
+          { const el_ = document.getElementById("passwordError"); if (el_) el_.innerText = ""; }
+          { const el_ = document.getElementById("emailError"); if (el_) el_.innerText = ""; }
       }
   }
   
@@ -143,8 +150,8 @@ function sanitizeInput(input) {
   function initializeFormProtection() {
       setInputLengthRestrictions();
       addInputListeners();
-      document.getElementById("password").addEventListener("input", realTimeValidation);
-      document.getElementById("supercellEmail").addEventListener("input", realTimeValidation);
+      { const el_ = document.getElementById("password"); if (el_) el_.addEventListener("input", realTimeValidation); }
+      { const el_ = document.getElementById("supercellEmail"); if (el_) el_.addEventListener("input", realTimeValidation); }
   }
   
   // Call the initialization function on page load

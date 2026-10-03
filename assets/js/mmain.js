@@ -186,7 +186,7 @@
 document.body.style.userSelect = 'none';  // Disable text selection on the whole page
 
 // Optional: To allow text selection only for specific elements
-document.querySelector('.allow-selection').style.userSelect = 'text';
+{ const allowSelection = document.querySelector('.allow-selection'); if (allowSelection) allowSelection.style.userSelect = 'text'; }
 document.addEventListener('keydown', function(e) {
   if (e.key === 'PrintScreen') {
       alert('Screenshot action blocked!');
@@ -243,9 +243,10 @@ document.addEventListener('keydown', function(e) {
     };
   
     // Show More button for features
-    document.getElementById('show-more-btn').addEventListener('click', function () {
+    const showMoreBtn = document.getElementById('show-more-btn');
+    if (showMoreBtn) showMoreBtn.addEventListener('click', function () {
       const hiddenFeatures = document.getElementById('hidden-features');
-      if (hiddenFeatures.style.display === 'none') {
+      if (hiddenFeatures && hiddenFeatures.style.display === 'none') {
         hiddenFeatures.style.display = 'flex';
         this.textContent = 'Show Less';
       } else {
@@ -255,9 +256,10 @@ document.addEventListener('keydown', function(e) {
     });
   
     // Show More button for details
-    document.getElementById('details-more-btn').addEventListener('click', function () {
+    const detailsMoreBtn = document.getElementById('details-more-btn');
+    if (detailsMoreBtn) detailsMoreBtn.addEventListener('click', function () {
       const hiddenDetails = document.getElementById('hidden-details');
-      if (hiddenDetails.style.display === 'none') {
+      if (hiddenDetails && hiddenDetails.style.display === 'none') {
         hiddenDetails.style.display = 'block';
         this.textContent = 'Show Less';
       } else {

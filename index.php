@@ -2564,7 +2564,6 @@ $result = $conn->query($query);
 
       <div class="col-lg-8">
         <!-- Embedded Map -->
-        <iframe 
         <div class="mt-3 text-center">
           <p style="font-size: 16px; font-weight: 600; color: #333; background-color: #f8f9fa; padding: 10px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
             Map disabled in the public demo. Configure your own location in local settings.
@@ -2743,11 +2742,11 @@ document.getElementById("modalImage").ondblclick = function() {
 }
 
     // Show play button on hover
-    $(document).ready(function() {
-        $('.video-thumbnail').hover(function() {
-            $(this).find('.play-button').show(); // Show play button on hover
-        }, function() {
-            $(this).find('.play-button').hide(); // Hide play button when not hovered
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.video-thumbnail').forEach(function (thumb) {
+            var playButton = thumb.querySelector('.play-button'); if (!playButton) return; // Show play button on hover
+            thumb.addEventListener('mouseenter', function () { playButton.style.display = ''; });
+            thumb.addEventListener('mouseleave', function () { playButton.style.display = 'none'; });
         });
     });
 

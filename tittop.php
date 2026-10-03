@@ -202,12 +202,17 @@ echo "<script>var isLoggedIn = " . json_encode($isLoggedIn) . ";</script>";
   }
 
     // Additional validation for form fields
-    document.getElementById('topUpForm').addEventListener('submit', function (e) {
-        const emailOrWhatsapp = document.getElementById("emailOrWhatsapp").value;
-        if (!emailOrWhatsapp) {
-            e.preventDefault();
-            alert("Please provide a valid email or WhatsApp number.");
-        }
+    document.addEventListener('DOMContentLoaded', function () {
+        var topUpForm = document.getElementById('topUpForm');
+        if (!topUpForm) return;
+        topUpForm.addEventListener('submit', function (e) {
+            var emailOrWhatsappField = document.getElementById("emailOrWhatsapp");
+            var emailOrWhatsapp = emailOrWhatsappField ? emailOrWhatsappField.value : '';
+            if (!emailOrWhatsapp) {
+                e.preventDefault();
+                alert("Please provide a valid email or WhatsApp number.");
+            }
+        });
     });
 
     // Function to protect against clickjacking

@@ -60,6 +60,9 @@ desktop.ini
 *.bak
 *.orig
 
+# ---- Temporary local dev harnesses (not part of the site) ----
+/_imgcheck.cjs
+
 # ---- Sass build cache ----
 .sass-cache/
 *.css.map
